@@ -11,15 +11,12 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.appounting.controller.logic.URL;
+import com.example.appounting.model.UsuarioDTO;
 import com.example.appounting.view.Menu;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 
 public class LogIn extends AppCompatActivity {
     private EditText pin;
@@ -43,7 +40,7 @@ public class LogIn extends AppCompatActivity {
         }else{
             if(usuarioTxt.toString().contains("@")){
                 if(usuarioTxt.toString().contains(".") && usuarioTxt.toString().contains(".com")){
-                    String consulta = "http://"+url.IP+"/"+url.sitio+"/buscarUsuario_Correo.php?email=" + usuarioTxt.getText().toString() + "&password=" + contrasenaTxt.getText().toString()+ "&pin=" + contrasenaTxt.getText().toString()+"";
+                    String consulta = "http://"+url.IP+"/"+url.sitio+"/buscarUsuario_Correo.php?email=" + usuarioTxt.getText().toString() + "&password='" + contrasenaTxt.getText().toString()+ "&pin=" + contrasenaTxt.getText().toString()+"";
                     System.out.println(consulta);
                     buscarUsuario(consulta);
                 }else{
@@ -72,16 +69,15 @@ public class LogIn extends AppCompatActivity {
                     if (usuarioTxt.getText().toString().equals(jsonObject.getString("usuario")) &&
                             contrasenaTxt.getText().toString().equals(jsonObject.getString("password"))) {
                         Intent irAMenu =new Intent(LogIn.this, Menu.class);
-                        irAMenu.putExtra("nombreUsuario",jsonObject.getString("nombres"));
-                        irAMenu.putExtra("montoUsuario",jsonObject.getString("monto"));
+                        irAMenu.putExtra("usuario",jsonObject.getString("usuario"));
                         registrarInicioSesion(jsonObject.getString("cuenta_numero_cuenta"));
                         startActivity(irAMenu);
                         Toast.makeText(getApplicationContext(), "Bienvenido usuario", Toast.LENGTH_SHORT).show();
                     } else {
                         Intent irAMenu =new Intent(LogIn.this, Menu.class);
-                        irAMenu.putExtra("nombreUsuario",jsonObject.getString("nombres"));
-                        irAMenu.putExtra("montoUsuario",jsonObject.getString("monto"));
-                        registrarInicioSesion(jsonObject.getString("cuenta_numero_cuenta"));
+                        System.out.println(jsonObject.names());
+                        irAMenu.putExtra("usuario",jsonObject.getString("usuario"));
+                        registrarInicioSesion(jsonObject.getString("numero_cuenta"));
                         startActivity(irAMenu);
                         Toast.makeText(getApplicationContext(), "Bienvenido usuario", Toast.LENGTH_SHORT).show();
                     }

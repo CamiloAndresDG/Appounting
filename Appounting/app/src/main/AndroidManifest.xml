@@ -17,7 +17,7 @@
             android:name=".RegistroUsuario"
             android:exported="false" />
         <activity
-            android:name=".URL"
+            android:name=".controller.logic.URL"
             android:exported="false" />
         <activity
             android:name=".Deuda_Panel"
