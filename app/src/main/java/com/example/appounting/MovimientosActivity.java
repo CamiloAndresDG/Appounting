@@ -6,9 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.appounting.Adapters.TransaccionAdapter;
 import com.example.appounting.model.TransaccionDTO;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -24,55 +36,27 @@ public class MovimientosActivity extends AppCompatActivity {
     RecyclerView recyclerViewMovimientos;
     TransaccionAdapter transaccionAdapter;
     //Button button;
-
+    String URL = "http://192.168.56.1/Appounting/listarTransacciones.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String URL = "http://192.168.56.1/Appounting/listar_Movimientos.php";
+        transaccionDTOArrayList = new ArrayList<>();
+        listarTransacciones();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movimientos);
         inicializarElementos();
-        /*button = (Button) findViewById(R.id.btnListarDepa);
-        ListView
-        listViewMovimientos = (ListView) findViewById(R.id.movimientos_ListView);
-        getMovimientos(URL);
-        listViewMovimientos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String Selecteditem = position+"";
-                Toast.makeText(getApplicationContext(), Selecteditem, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Ha seleccionado " +
-                        Selecteditem, Toast.LENGTH_SHORT).show();
-                intent = new Intent(Movimientos_Panel.this, Detalle_Movimiento.class);
-                intent.putExtra("nombre",(position+1)+"");
-                startActivity(intent);
-            }
-        });
-*/
-
     }
 
     private void inicializarElementos() {
-        transaccionDTOArrayList = new ArrayList<>();
-
-
-        transaccionDTOArrayList.add(new TransaccionDTO("12fwe", "Pago agua", 37000, false,"28/04/2022","Informacion del movimiento"));
-        transaccionDTOArrayList.add(new TransaccionDTO("13fwe", "Hamburguesas", 50000, false,"29/04/2022","Informacion del movimiento"));
-        transaccionDTOArrayList.add(new TransaccionDTO("15fwe", "Ingreso de trabajo", 100000, true,"30/04/2022","Informacion del movimiento"));
-
-
         recyclerViewMovimientos = findViewById(R.id.recyclerViewMovimientos);
         recyclerViewMovimientos.setLayoutManager(new LinearLayoutManager(this));
-
         TransaccionAdapter transaccionAdapter = new TransaccionAdapter(transaccionDTOArrayList, this, new TransaccionAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(TransaccionDTO transaccionDTO) {
                 moveToDescription(transaccionDTO);
             }
         });
-
         recyclerViewMovimientos.setAdapter(transaccionAdapter);
-
     }
 
     private void moveToDescription(TransaccionDTO transaccionDTO) {
@@ -82,49 +66,47 @@ public class MovimientosActivity extends AppCompatActivity {
         intent.putExtra("TransaccionDTO", transaccionDTO);
         startActivity(intent);
     }
-    /*
 
-    public void getMovimientos(String URL) {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        System.out.println(URL);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+    private void listarTransacciones(){
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                response = response.replace("][", ",");
-                if (response.length() > 0) {
-                    try {
-                        JSONArray json = new JSONArray(response);
-                        Log.i("sizejson", "" + json.length());
-                        cargarListView(json);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        System.out.println(e);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String exito = jsonObject.getString("exito");
+                    JSONArray jsonArray = jsonObject.getJSONArray("datos");
+                    if (exito.equals("1")){
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            String referencia = object.getString("referencia");
+                            String nombre = object.getString("nombre");
+                            double monto = object.getDouble("monto");
+                            boolean tipo = Boolean.valueOf(object.getString("tipo"));
+                            String fecha = object.getString("fecha");
+                            String informacion = object.getString("detalles");
+                            String cuenta = object.getString("cuenta_numero_cuenta");
+                            TransaccionDTO transaccionDTO = new TransaccionDTO(referencia, nombre, monto, tipo, fecha, informacion);
+                            agregarALista(transaccionDTO);
+                        }
                     }
+                } catch (JSONException e) {
+                    System.out.println("1");
+                    e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                Toast.makeText(MovimientosActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        queue.add(stringRequest);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
     }
 
-    public void cargarListView(JSONArray json) {
-
-        ArrayList<String> lista = new ArrayList<>();
-        for (int i = 0; i < json.length(); i += 1) {
-            try {
-                lista.add(json.getString(i));
-            } catch (JSONException e) {
-                System.out.println(e);
-                e.printStackTrace();
-            }
-        }
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lista);
-        listViewMovimientos.setAdapter(adaptador); 
-    }*/
+    private void agregarALista(TransaccionDTO transaccionDTO) {
+        this.transaccionDTOArrayList.add(transaccionDTO);
+    }
 
 
 }

@@ -30,7 +30,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        if(usuarioTxt.toString().equals("")){
+        /*if(usuarioTxt.toString().equals("")){
             usuarioTxt.setError("Campo vacio");
         }else if (contrasenaTxt.toString().equals("")){
             contrasenaTxt.setError("Campo vacio");
@@ -38,9 +38,9 @@ public class LogInActivity extends AppCompatActivity {
             if(usuarioTxt.toString().contains("@")){
                 if(usuarioTxt.toString().contains(".") && usuarioTxt.toString().contains(".com")){
                     String consulta = "http://"+url.IP+"/"+url.sitio+"/buscarUsuario_Correo.php?email=" + usuarioTxt.getText().toString() + "&password=" + contrasenaTxt.getText().toString()+ "&pin=" + contrasenaTxt.getText().toString()+"";
-                    System.out.println(consulta);
-                    buscarUsuario(consulta);
-                }else{
+                    System.out.println(consulta);*/
+                    buscarUsuario("Camilo marica");
+                /*}else{
                     Toast.makeText(getApplicationContext(), "Su correo electronico no esta completo.", Toast.LENGTH_SHORT).show();
                 }
             }else{
@@ -50,22 +50,22 @@ public class LogInActivity extends AppCompatActivity {
                 System.out.println(consulta);
                 buscarUsuario(consulta);
             }
-        }
+        }*/
     }
 
     private void buscarUsuario(String URL) {
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, response -> {
+        /*JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, response -> {
             JSONObject jsonObject;
             for (int i = 0; i < response.length(); i++) {
                 try {
                     jsonObject = (JSONObject) response.getJSONObject(i);
                     if (usuarioTxt.getText().toString().equals(jsonObject.getString("usuario")) &&
-                            contrasenaTxt.getText().toString().equals(jsonObject.getString("password"))) {
+                            contrasenaTxt.getText().toString().equals(jsonObject.getString("password"))) {*/
                         Intent irAMenu =new Intent(LogInActivity.this, com.example.appounting.view.MenuActivity.class);
-                        irAMenu.putExtra("nombreUsuario",jsonObject.getString("nombres"));
+                        //irAMenu.putExtra("nombreUsuario",jsonObject.getString("nombres"));
                         startActivity(irAMenu);
                         Toast.makeText(getApplicationContext(), "Bienvenido usuario", Toast.LENGTH_SHORT).show();
-                    } else {
+                    /*} else {
                         Toast.makeText(getApplicationContext(), "NO SE PUDO", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
@@ -76,6 +76,6 @@ public class LogInActivity extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show()
         );
         requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(jsonArrayRequest);*/
     }
 }

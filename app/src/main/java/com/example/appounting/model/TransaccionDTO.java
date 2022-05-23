@@ -6,16 +6,16 @@ public class TransaccionDTO implements Serializable {
     private String referencia;
     private String nombre;
     private double monto;
-    private boolean ingreso; //True si es ingreso, false si es un gasto
+    private boolean tipo; //True si es ingreso, false si es un gasto
     private String fecha;
     private String informacion;
    // private CuentaDTO cuentaDTO;
 
-    public TransaccionDTO(String referencia, String nombre, double monto, boolean ingreso, String fecha, String informacion){
+    public TransaccionDTO(String referencia, String nombre, double monto, boolean tipo, String fecha, String informacion){
         this.referencia = referencia;
         this.nombre = nombre;
         this.monto = monto;
-        this.ingreso = ingreso;
+        this.tipo = tipo;
         this.fecha = fecha; 
         this.informacion = informacion; //null
 
@@ -52,12 +52,12 @@ public class TransaccionDTO implements Serializable {
         return this.monto;
     }
 
-    public boolean getIngreso(){
-        return this.ingreso;
+    public boolean getTipo(){
+        return this.tipo;
     }
 
-    public void setIngreso(boolean ingreso){
-        this.ingreso = ingreso;
+    public void setTipo(boolean tipo){
+        this.tipo = tipo;
     }
 
     public String getFecha(){
@@ -81,7 +81,7 @@ public class TransaccionDTO implements Serializable {
     //}
 
     public String montoToString(){
-        if(this.ingreso){
+        if(this.tipo){
             return "$ " + this.monto;
         }
         return "$ -" + this.monto;
@@ -93,7 +93,7 @@ public class TransaccionDTO implements Serializable {
                 "referencia='" + referencia + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", monto=" + monto +
-                ", ingreso=" + ingreso +
+                ", ingreso=" + tipo +
                 ", fecha='" + fecha + '\'' +
                 ", informacion='" + informacion + '\'' +
                 //", persona='" + cuentaDTO.getNumero_cuenta() + '\'' +

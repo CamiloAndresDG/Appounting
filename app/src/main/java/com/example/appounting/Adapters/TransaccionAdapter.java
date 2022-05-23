@@ -67,7 +67,7 @@ public class TransaccionAdapter extends RecyclerView.Adapter<TransaccionAdapter.
         void binData(TransaccionDTO transaccionDTO){
             textViewNombreMovimiento.setText(transaccionDTO.getNombre());
             textViewValorMovimiento.setText(String.valueOf(transaccionDTO.montoToString()));
-            if(transaccionDTO.getIngreso()){
+            if(transaccionDTO.getTipo()){
                 textViewValorMovimiento.setTextColor(Color.rgb(0, 255, 0));
             }else{
                 textViewValorMovimiento.setTextColor(Color.rgb(255, 0, 0));

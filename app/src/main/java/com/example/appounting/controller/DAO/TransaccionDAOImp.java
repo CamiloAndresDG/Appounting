@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class TransaccionDAOImp implements TransaccionDAO {
+/*public class TransaccionDAOImp implements TransaccionDAO {
 
     private final CuentaDAO cuentaDAO;
 
@@ -36,7 +36,7 @@ public class TransaccionDAOImp implements TransaccionDAO {
     //este como se puede hacer para retornar el objeto
     @Override
     public TransaccionDTO find(String referencia) {
-       JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+       JsonArrayRequest jsonArrayRequest = new JsonArrayRequest("USLCambiar", new Response.Listener<JSONArray>() {
            @Override
            public void onResponse(JSONArray response) {
                JSONObject jsonObject = null;
@@ -65,12 +65,12 @@ public class TransaccionDAOImp implements TransaccionDAO {
        });
         return transaccion;
     }
-
+/*
     @Override
     public ArrayList<TransaccionDTO> findAll() {
         ArrayList<TransaccionDTO> transacciones = new ArrayList<>();
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        //RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -80,7 +80,7 @@ public class TransaccionDAOImp implements TransaccionDAO {
                     try {
                         JSONArray json = new JSONArray(response);
                         Log.i("sizejson", "" + json.length());
-                        CargarListView(json);
+                        //CargarListView(json);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -103,4 +103,4 @@ public class TransaccionDAOImp implements TransaccionDAO {
     public int count() {
         return 0;
     }
-}
+}*/

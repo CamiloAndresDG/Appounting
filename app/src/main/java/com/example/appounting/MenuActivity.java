@@ -20,9 +20,9 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        String nombreUsuario=getIntent().getStringExtra("nombreUsuario");
-        Toast.makeText(getApplicationContext(),nombreUsuario, Toast.LENGTH_SHORT).show();
-        mensaje= "Hola, "+ nombreUsuario.toString();
+        //String nombreUsuario=getIntent().getStringExtra("nombreUsuario");
+        //Toast.makeText(getApplicationContext(),nombreUsuario, Toast.LENGTH_SHORT).show();
+       // mensaje= "Hola, "+ nombreUsuario.toString();
         System.out.println(mensaje);
         userTV=(TextView) findViewById(R.id.textView11);
         userTV.setText(mensaje);
