@@ -57,13 +57,13 @@ CREATE TABLE IF NOT EXISTS `appounting`.`cuenta` (
 DROP TABLE IF EXISTS `appounting`.`deudas` ;
 
 CREATE TABLE IF NOT EXISTS `appounting`.`deudas` (
-  `referencia` INT NOT NULL,
+  `referencia` VARCHAR(100) NOT NULL,
   `nombre` VARCHAR(100) NOT NULL,
   `monto_total` DOUBLE(9,2) NOT NULL,
   `monto_restante` DOUBLE(9,2) NOT NULL,
   `cant_cuotas` INT NOT NULL,
   `cant_cuotas_restantes` INT NOT NULL,
-  `fecha_limite_pago` DATE NULL,
+  `fecha_limite_pago` VARCHAR(10) NULL,
   `estado` ENUM("PAGADO", "NO PAGADO") NOT NULL,
   `descripcion` TEXT NULL,
   `cuenta_numero_cuenta` INT NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `appounting`.`deudas` (
 DROP TABLE IF EXISTS `appounting`.`ahorros` ;
 
 CREATE TABLE IF NOT EXISTS `appounting`.`ahorros` (
-  `referencia` INT NOT NULL,
+  `referencia` VARCHAR(100) NOT NULL,
   `nombre` VARCHAR(80) NOT NULL,
   `monto_total` DOUBLE(9,2) NOT NULL,
   `monto_actual` DOUBLE(9,2) NULL,
@@ -101,11 +101,11 @@ CREATE TABLE IF NOT EXISTS `appounting`.`ahorros` (
 DROP TABLE IF EXISTS `appounting`.`transaccion` ;
 
 CREATE TABLE IF NOT EXISTS `appounting`.`transaccion` (
-  `referencia` INT NOT NULL,
+  `referencia` VARCHAR(100) NOT NULL,
   `nombre` VARCHAR(100) NOT NULL,
   `monto` DOUBLE(9,2) NOT NULL,
   `tipo` TINYINT NOT NULL,
-  `fecha` DATE NOT NULL,
+  `fecha` VARCHAR(10) NOT NULL,
   `detalles` TEXT NULL,
   `cuenta_numero_cuenta` INT NOT NULL,
   PRIMARY KEY (`referencia`),
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `appounting`.`transaccion` (
 DROP TABLE IF EXISTS `appounting`.`prestamos` ;
 
 CREATE TABLE IF NOT EXISTS `appounting`.`prestamos` (
-  `referencia` INT NOT NULL,
+  `referencia` VARCHAR(100) NOT NULL,
   `nombre` VARCHAR(100) NOT NULL,
   `monto_total` DOUBLE(9,2) NOT NULL,
   `monto_restante` DOUBLE(9,2) NULL,
@@ -145,8 +145,8 @@ DROP TABLE IF EXISTS `appounting`.`sesiones` ;
 
 CREATE TABLE IF NOT EXISTS `appounting`.`sesiones` (
   `idSesion` INT NOT NULL,
-  `fecha_inicio` DATE NOT NULL,
-  `fecha_fin` DATE NULL,
+  `fecha_inicio` VARCHAR(10) NOT NULL,
+  `fecha_fin` VARCHAR(10) NULL,
   `cuenta_numero_cuenta` INT NOT NULL,
   PRIMARY KEY (`idSesion`),
   INDEX `fk_sesiones_cuenta1_idx` (`cuenta_numero_cuenta`),
