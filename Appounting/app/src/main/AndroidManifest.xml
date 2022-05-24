@@ -14,25 +14,34 @@
         android:theme="@style/Theme.Appounting"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".RegistroUsuario"
+            android:name=".PrestamosActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.logic.URL"
+            android:name=".AhorrosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GastosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.URL"
             android:exported="false" />
         <activity
             android:name=".Deuda_Panel"
             android:exported="false" />
         <activity
-            android:name=".Movimientos_Panel"
+            android:name=".MovimientosActivity"
             android:exported="false" />
         <activity
-            android:name=".LogIn"
+            android:name=".LogInActivity"
             android:exported="false" />
         <activity
-            android:name=".view.Menu"
+            android:name=".view.MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".Detalle_Movimiento"
+            android:name=".DetallesMovimientoActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"

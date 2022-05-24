@@ -1,22 +1,30 @@
 package com.example.appounting.model;
 
-public class CuentaDTO{
-    private int numero_cuenta;
+import java.io.Serializable;
+
+public class CuentaDTO implements Serializable {
+    private int numeroCuenta;
     private double monto;
     private UsuarioDTO usuarioDTO;
+
+    public CuentaDTO(){
+        this.numeroCuenta = 0;
+        this.monto = 0;
+        this.usuarioDTO = null;
+    }
     
     public CuentaDTO(int numero_cuenta, double monto, UsuarioDTO usuario){
-        this.numero_cuenta = numero_cuenta;
+        this.numeroCuenta = numero_cuenta;
         this.monto = monto;
         this.usuarioDTO = usuario;
     }
 
-    public int getNumero_cuenta() {
-        return numero_cuenta;
+    public int getNumeroCuenta() {
+        return numeroCuenta;
     }
 
-    public void setNumero_cuenta(int numero_cuenta) {
-        this.numero_cuenta = numero_cuenta;
+    public void setNumeroCuenta(int numeroCuenta) {
+        this.numeroCuenta = numeroCuenta;
     }
 
     public double getMonto() {
@@ -38,7 +46,7 @@ public class CuentaDTO{
     @Override
     public String toString() {
         return "CuentaDTO{" +
-                "numero_cuenta=" + numero_cuenta +
+                "numero_cuenta=" + numeroCuenta +
                 ", monto=" + monto +
                 ", usuarioDTO=" + usuarioDTO +
                 '}';

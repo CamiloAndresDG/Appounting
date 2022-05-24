@@ -1,23 +1,36 @@
 package com.example.appounting.model;
 
-public class TransaccionDTO{
+import java.io.Serializable;
+
+public class TransaccionDTO implements Serializable {
     private String referencia;
     private String nombre;
     private double monto;
-    private boolean ingreso; //True si es ingreso, false si es un gasto
+    private boolean tipo; //True si es ingreso, false si es un gasto
     private String fecha;
     private String informacion;
-    //private CuentaDTO cuentaDTO;
+   // private CuentaDTO cuentaDTO;
 
-    public TransaccionDTO(String referencia, String nombre, double monto, boolean ingreso, String fecha, String informacion){
+    public TransaccionDTO(String referencia, String nombre, double monto, boolean tipo, String fecha, String informacion){
         this.referencia = referencia;
         this.nombre = nombre;
         this.monto = monto;
-        this.ingreso = ingreso;
+        this.tipo = tipo;
         this.fecha = fecha; 
         this.informacion = informacion; //null
 
     }
+
+    /*public TransaccionDTO(String referencia, String nombre, double monto, boolean ingreso, String fecha, String informacion, CuentaDTO cuentaDTO){
+        this.referencia = referencia;
+        this.nombre = nombre;
+        this.monto = monto;
+        this.ingreso = ingreso;
+        this.fecha = fecha;
+        this.informacion = informacion; //null
+        this.cuentaDTO = cuentaDTO;
+
+    }*/
 
     public String getReferencia(){
         return this.referencia;
@@ -39,14 +52,12 @@ public class TransaccionDTO{
         return this.monto;
     }
 
-
-
-    public boolean getIngreso(){
-        return this.ingreso;
+    public boolean getTipo(){
+        return this.tipo;
     }
 
-    public void setIngreso(boolean ingreso){
-        this.ingreso = ingreso;
+    public void setTipo(boolean tipo){
+        this.tipo = tipo;
     }
 
     public String getFecha(){
@@ -61,5 +72,31 @@ public class TransaccionDTO{
         return this.informacion;
     }
 
+    //public CuentaDTO getCuentaDTO() {
+        //return cuentaDTO;
+    //}
 
+    //public void setCuentaDTO(CuentaDTO cuentaDTO) {
+        //this.cuentaDTO = cuentaDTO;
+    //}
+
+    public String montoToString(){
+        if(this.tipo){
+            return "$ " + this.monto;
+        }
+        return "$ -" + this.monto;
+    }
+
+    @Override
+    public String toString() {
+        return "TransaccionDTO{" +
+                "referencia='" + referencia + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", monto=" + monto +
+                ", ingreso=" + tipo +
+                ", fecha='" + fecha + '\'' +
+                ", informacion='" + informacion + '\'' +
+                //", persona='" + cuentaDTO.getNumero_cuenta() + '\'' +
+                '}';
+    }
 }

@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.appounting.LogIn;
+import com.example.appounting.LogInActivity;
 import com.example.appounting.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
                         sleep(100);
                         tiempo=tiempo+100;
                     }
-                    Intent i =new Intent(MainActivity.this, LogIn.class);
+                    Intent i =new Intent(MainActivity.this, LogInActivity.class);
                     startActivity(i);
                 }
                 catch(InterruptedException e){

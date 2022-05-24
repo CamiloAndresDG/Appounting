@@ -1,67 +1,28 @@
 package com.example.appounting.model;
 
-import java.util.Objects;
-
 public class UsuarioDTO{
-
-    private String usuario;
-    private Integer cedula;
-    private String password;
-    private Short pin;
+    private int cedula;
     private String nombres;
     private String apellidos;
     private String email;
+    private String usuario;
+    private int pin;
 
-    public UsuarioDTO() {
-        this.usuario = "";
-        this.cedula = 0;
-        this.password = "";
-        this.pin = 0;
-        this.nombres = "";
-        this.apellidos = "";
-        this.email = "";
-    }
-
-    public UsuarioDTO(String usuario, Integer cedula, String password, Short pin, String nombres, String apellidos, String email) {
-        this.usuario = usuario;
+    public UsuarioDTO(int cedula, String nombres, String apellidos, String email, String usuario, int pin){
         this.cedula = cedula;
-        this.password = password;
-        this.pin = pin;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.email = email;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
         this.usuario = usuario;
+        this.pin = pin;
     }
 
-    public Integer getCedula() {
+    public int getCedula() {
         return cedula;
     }
 
-    public void setCedula(Integer cedula) {
+    public void setCedula(int cedula) {
         this.cedula = cedula;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Short getPin() {
-        return pin;
-    }
-
-    public void setPin(Short pin) {
-        this.pin = pin;
     }
 
     public String getNombres() {
@@ -88,29 +49,30 @@ public class UsuarioDTO{
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UsuarioDTO)) return false;
-        UsuarioDTO that = (UsuarioDTO) o;
-        return getUsuario().equals(that.getUsuario()) && getCedula().equals(that.getCedula()) && getPassword().equals(that.getPassword()) && getPin().equals(that.getPin()) && getNombres().equals(that.getNombres()) && getApellidos().equals(that.getApellidos()) && getEmail().equals(that.getEmail());
+    public String getUsuario() {
+        return usuario;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getUsuario(), getCedula(), getPassword(), getPin(), getNombres(), getApellidos(), getEmail());
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public int getPassword() {
+        return pin;
+    }
+
+    public void setPassword(int password) {
+        this.pin = pin;
     }
 
     @Override
     public String toString() {
-        return "UsuarioDTO{" +
-                "usuario='" + usuario + '\'' +
-                ", cedula=" + cedula +
-                ", password='" + password + '\'' +
-                ", pin=" + pin +
+        return "Usuario {" +
+                "cedula=" + cedula +
                 ", nombres='" + nombres + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", email='" + email + '\'' +
+                ", usuario='" + usuario + '\'' +
                 '}';
     }
 }
